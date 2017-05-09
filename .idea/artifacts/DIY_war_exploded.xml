@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="极客DIY:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/DIY_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="极客DIY/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="极客DIY" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

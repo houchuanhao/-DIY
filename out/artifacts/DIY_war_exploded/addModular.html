@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!----------下面是Intercooler.js的文件包-----
+    <script type="text/javascript" src="js/intercooler.js"></script>-->
+    <meta charset="utf-8">
+    <title>发布你的DIY</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- jQuery (necessary JavaScript plugins) -->
+    <!-- Custom Theme files -->
+    <link href='css/font.css' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/av-min-1.2.1.js"></script>
+    <link href="css/hightlight.css" rel="stylesheet" type="text/css">
+    <script src="js/highlight.min.js"></script>
+    <!-- Custom Theme files -->
+    <!--//theme-style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+        body{
+            background-color: #2d2d2d;
+            color: #0dc5dd;
+        }
+        *{
+            border: 0;
+            margin:0;
+            padding: 0;
+        }
+        #dInt{
+            height: 30%;
+        }
+        #oncode{
+            widh:100%;
+            background-color: #FFFFFF;
+        }
+    </style>
+    <script>
+        var APP_ID = 'nrQJolPEqzOK1qEKJM1feLON-9Nh9j0Va';
+
+        // 应用 Key，用来校验权限（Web 端可以配置安全域名来保护数据安全）
+        var APP_KEY = '7mpFcX7pBvw2gL4rmcJ81H3r';
+
+        // 初始化
+        AV.init({
+            appId: APP_ID,
+            appKey: APP_KEY
+        });
+        function post(pUrl){  //Url是图片地址
+            var user=AV.User.current();
+            var UserName=user.getUsername();
+            var dName=$("#dName").val();
+            var dInt=$("#dInt").val();
+            var dPrice=$("#DiyPrice").val();
+            $.ajax({
+                type: 'POST',
+                url: 'addModular.jsp',
+                async:true,
+                data: {UserName:UserName,dName:dName,dInt:dInt,pUrl:pUrl,dPrice:dPrice},
+                success: function (data) {
+                    alert("添加成功");
+                    console.log(data);
+                },
+                // dataType: 'json'
+            });
+        }
+        function show(){
+            var user = AV.User.current();
+            if(!user){  //user为空
+                alert("请先登录");
+                return;
+            }
+            function Alert(str) {
+                var out=$("<div class='modal fade'  role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'><div class='modal-dialog'> <div class='modal-content'> <div class='modal-header'> <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button> <h4 class='modal-title' id='myModalLabel'>消息 </h4> </div> <div class='modal-body'>"+str+"</div><div class='modal-footer'><button type='button' class='btn btn-default btn-block' data-dismiss='modal'>关闭</button></div></div></div></div>")
+                $("body").prepend(out);
+                out.modal("show");
+            }
+            //if(AV.current())
+            var fileUploadControl = $('#dPicture')[0];
+            if (fileUploadControl.files.length > 0) {
+                var localFile = fileUploadControl.files[0];
+                var name = 'avatar.jpg';
+                var file = new AV.File(name, localFile);
+                file.save().then(function(file) {
+                    // 文件保存成功
+                    console.log(file.url());
+                    post(file.url());
+                }, function(error) {
+                    // 异常处理
+                    console.error(error);
+                });
+            }
+        }
+        function pictureChange() {
+            var fileUploadControl = $('#dPicture')[0];
+            if (fileUploadControl.files.length > 0) {
+                var localFile = fileUploadControl.files[0];
+                var name = 'avatar.jpg';
+                var file = new AV.File(name, localFile);
+                file.save().then(function(file) {
+                    // 文件保存成功
+                    console.log(file.url());
+                    $("#inputImage").attr("src",file.url());
+                    //post(file.url());
+                }, function(error) {
+                    // 异常处理
+                    console.error(error);
+                });
+            }
+        }
+    </script>
+</head>
+<body id="myIframe">
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="page-header">
+                <h1>
+                    添加模块
+                </h1>
+            </div>
+            <form role="form">
+                <div class="form-group" id="DiyName" class="little">
+                    <label >模块名称</label><input type="text" class="form-control" id="dName" />
+                </div>
+                <div class="form-group"  class="little">
+                    <label >模块价格</label><input type="text" class="form-control" id="DiyPrice" />
+                </div>
+                <div class="form-group">
+                    <label>模块简介</label>
+                    <textarea class="form-control" id="dInt"></textarea>
+                </div>
+                <div class="form-group">
+                    <label >上传图片</label><input type="file" id="dPicture" required="required" onchange="pictureChange()" />
+                    <img src="" id="inputImage">
+                </div>
+            </form>
+            <button  class="btn btn-default" onclick="show()">添加</button>
+        </div>
+    </div>
+</div>
+<script>
+    hljs.initHighlightingOnLoad();
+    //名称  DIY简介 上传图片 添加模块  代码
+    var width=$(document.body).outerWidth(true);
+    var height=$(document.body).outerWidth(true);
+    //alert(width);
+    if(width>400){
+        $("#DiyName").width(300);
+        $("#DiyPrice").width(300);
+    }
+    $("#dInt").height(height/6);
+    $("#dCode").height(height/6);
+</script>
+</body>
+</html>
