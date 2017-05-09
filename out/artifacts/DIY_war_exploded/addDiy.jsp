@@ -1,5 +1,4 @@
 <%@ page import="com.Connecter" %>
-<%@ page import="com.Login" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="com.MyMail" %><%--
   Created by IntelliJ IDEA.
