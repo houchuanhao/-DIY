@@ -1,0 +1,89 @@
+
+<html>
+<head>
+
+    <title>Title</title>
+
+    <!----------下面是Intercooler.js的文件包-----
+<script type="text/javascript" src="js/intercooler.js"></script>-->
+    <meta charset="UTF-8">
+    <title>发布你的DIY</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- jQuery (necessary JavaScript plugins) -->
+    <!-- Custom Theme files -->
+    <link href='css/font.css' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/av-min-1.2.1.js"></script>
+    <link href="css/hightlight.css" rel="stylesheet" type="text/css">
+    <script src="js/highlight.min.js"></script>
+    <!-- Custom Theme files -->
+    <!--//theme-style-->
+    <STYLE>
+        textarea{
+            width: 100%;
+            height: 100px;
+        }
+    </STYLE>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script>
+        function output(){
+            $tablespaceName=$("#tablespace").val();
+            $content=$("#content").val();
+            $locate=$("#locate").val();
+            $filesize=$("#fileSize").val();
+            $autoextend=$("#autoextend").val();
+            $extendSize=$("#extendSize").val();
+            $maxSize=$("#maxSize").val();
+            $ubiformSize=$("#ubiformSize").val();
+            var locatSet="alter system set db_create_file_dest='"+$locate+"';";
+            $create="create "+$content+" tablespace "+$tablespaceName+ "   datafile size "+$filesize+ " autoextend "+ $autoextend;
+            if($autoextend=="on"){
+                $add= " next "+$extendSize+"  maxsize "+$maxSize+"  uniform size "+$ubiformSize;
+                $create+=$add;
+            }
+            $create+=";";
+            $("#output").val($create);
+            $("#alter").val(locatSet);
+        }
+
+
+    </script>
+</head>
+<body>
+表空间<br>
+<input type="text" id="tablespace" /><br>
+存储内容:
+<select id="content">
+    <option value="undo">还原段</option>
+    <option value="temporary">临时段</option>
+</select>
+---------------------------<h1>文件信息</h1>
+存储位置<br>  D:\ORA11G\D124825\DISK1\CON0.TCL   E:\ORA11G\D124825\DISK4\CON15.TCL   C:\ORA11G\D124825\DISK9\CON433.TCL
+<input type="text" id="locate"/><br>
+文件大小(50M)
+<input type="text" id="fileSize"><br>
+自动扩展特性
+<select id="autoextend">
+    <option value="on">支持</option>
+    <option value="off">不支持</option>
+</select>
+每次扩展量
+<input id="extendSize" type="text" />
+最大扩展量
+<input id="maxSize" type="text" />
+区大小
+<input id="ubiformSize" type="text" />
+<button onclick="output()">输出</button>
+<textarea id="alter">输出
+</textarea>
+<textarea id="output">输出
+</textarea>
+</body>
+</body>
+</html>
+
+
+

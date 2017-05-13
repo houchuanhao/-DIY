@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href='css/font.css' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/av-min-1.2.1.js"></script>
+    <link href="css/hightlight.css" rel="stylesheet" type="text/css">
+    <script src="js/highlight.min.js"></script>
+    <!-- Custom Theme files -->
+</head>
+<body>
+create table RJCPAR_GAC1(
+par_id char(7),
+p_name nchar(12),
+ptype varchar2(4) default '块状',
+p_leave date default sysdate,
+p_quan decimal(10,0) default 100,
+psubpart char(7),
+p_plant char(14)
+)tablespace TEBG enable row movement initrans 9 storage (buffer_pool recycle);
+Comment on table RJCPAR_GAC1 is '零件基本信息-普通表';
+字段说明如下：
+Comment on column RJCPAR_GAC1.par_id is '件号';
+Comment on column RJCPAR_GAC1.p_name is '零件名称';
+Comment on column RJCPAR_GAC1.ptype is '零件类别';
+Comment on column RJCPAR_GAC1.p_leave is '生产时间';
+Comment on column RJCPAR_GAC1.p_quan is '生产数量';
+Comment on column RJCPAR_GAC1.psubpart is '构成零件';
+Comment on column RJCPAR_GAC1.p_plant is '生产车间';
+
+</body>
+</html>

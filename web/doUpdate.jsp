@@ -12,7 +12,6 @@
 </head>
 <body>
 <%@ page import="com.Connecter" %>
-<%@ page import="com.Login" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="com.MyMail" %><%--
   Created by IntelliJ IDEA.
@@ -40,7 +39,7 @@
     String id=request.getParameter("id");
     String Password=request.getParameter("Password");  //+ +"','"
    // String sql="insert into DIY(pUrl,dName,UserName,dInt,dCode) values('"+pUrl+"','"+ dName+"','"+UserName +"','"+ dInt+"','"+dCode +"')";
-    String sql="update Diy set pUrl='"+pUrl+"',dName='"+dName+"',UserName='"+UserName+"',dInt='+"+dInt+"',dCode='"+dCode+"' where id='"+id+"'";
+    String sql="update Diy set pUrl='"+pUrl+"',dName='"+dName+"',UserName='"+UserName+"',dInt='"+dInt+"',dCode='"+dCode+"' where id='"+id+"'";
     //System.out.println(sql);
     out.print("success");
     int n=Connecter.statement.executeUpdate(sql);
